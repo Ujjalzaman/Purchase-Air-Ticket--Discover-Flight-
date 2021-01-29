@@ -1,3 +1,4 @@
+//flight seat price and totalPrice
 function getFlightSeatNumTotalPrice(seatIncrease, flightClass) {
     const flightSeat = document.getElementById(flightClass + "-SeatQuantity");
     const flightSeatNum = parseInt(flightSeat.value);
@@ -21,7 +22,7 @@ function getFlightSeatNumTotalPrice(seatIncrease, flightClass) {
     document.getElementById(flightClass + "-seatAmount").innerText = ticketPrice;
     calculatePriceAddcheckOutMemo(false);
 }
-
+//calculate total price and add extra part here
 function calculatePriceAddcheckOutMemo(checkoutConfirm){
     let totalEconomyAmount = document.getElementById("economy-SeatQuantity").value;
     let totalFirstClassAmount = document.getElementById("firstClass-SeatQuantity").value;
@@ -30,7 +31,7 @@ function calculatePriceAddcheckOutMemo(checkoutConfirm){
     let totalAmount = totalFirstClassAmount *150 + totalEconomyAmount *100;
     let tax = totalAmount *0.1;
     let grandTotal = totalAmount + tax;
-    if(checkoutConfirm == true){
+    if(checkoutConfirm == true){                //use checkout and memo form in on one line
         document.getElementById("totalAmountPaid").innerText = totalAmount;
         document.getElementById("taxPaid").innerText = tax;
         document.getElementById("grandTotalPaid").innerText = grandTotal;
@@ -46,6 +47,7 @@ function calculatePriceAddcheckOutMemo(checkoutConfirm){
     }
 }
 
+//handle --> hidden booking page and display checkout confrim page
 document.getElementById("bookNowBtn").addEventListener("click", function(){
     document.getElementById("confirmation").style.display ="block";
     document.getElementById("orderConfirm").style.display = "none";
