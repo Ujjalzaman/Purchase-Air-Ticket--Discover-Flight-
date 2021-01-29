@@ -7,12 +7,23 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
+    
+}
+main{
     background:url("images/bg.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
     background-size: cover;
 }
+/* body{
+    font-family: 'Roboto', sans-serif;
+    background:url("images/bg.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+} */
 
 nav{
     height: 50px;
@@ -120,5 +131,11 @@ nav ul li a:hover, a.active{
 .amount{
     display: flex;
     justify-content: space-between;
+}
+.order-memo{
+    padding:100px 0;
+}
+#confirmation{
+    display:none;
 }
 

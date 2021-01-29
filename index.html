@@ -10,101 +10,260 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
     <!-- Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!--Header and Menu Section-->
-    <header class="container">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a class="active" href="#">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!--Booking Section-->
-    <main class="main-content container">
-        <div class="booking-form">
-            <h3>Booking Flights</h3>
-            <div class="input-group">
-                <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
-            </div>
-            <div class="input-group">
-                <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
-            </div>
-            <div class="inputs">
+    <main id="orderConfirm">
+        <!--Header and Menu Section-->
+        <header class="container">
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a class="active" href="#">Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!--Booking Section-->
+        <section class="main-content container">
+            <div class="booking-form">
+                <h3>Booking Flights</h3>
                 <div class="input-group">
-                    <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                    <label for="">Flying From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
                 </div>
                 <div class="input-group">
-                    <label for="">Return</label>
-                    <input class="inp-style" type="date" name="">
+                    <label for="">Flying To</label>
+                    <input class="inp-style" type="text" name="" placeholder="New York, United States">
                 </div>
-            </div>
-            <div class="input-group f-class">
-                <div>
-                    <label for="">First Class ($<span id="firstClass-seatAmount">00</span>)</label>
-                    <input id="firstClass-SeatQuantity" class="inp-style inp-width" type="number" name="" value="0">
-                </div>
-                <div class="plus-minus-btn">
-                    <p><span id="firstClass-SeatIncrease"> + </span> <span id="firstClass-SeatDecrease"> - </span></p>
-                </div>
-            </div>
-            
-            <div class="input-group f-class">
-                <div>
-                    <label for="">Economy ($<span id="economy-seatAmount">00</span>)</label>
-                    <input id="economy-SeatQuantity" class="inp-style inp-width" type="number" name="" value="0">
-                </div>
-                <div class="plus-minus-btn">
-                    <p> <span id="economy-SeatIncrease">+</span> <span id="economy-SeatDecrease">-</span> </p>
-                </div>
-            </div>
-            <div class="calculations">
-                <div class="amount">
-                    <div class="left">
-                        <p>Subtotal</p>
+                <div class="inputs">
+                    <div class="input-group">
+                        <label" for="">Departure</label>
+                            <input class="inp-style" type="date" name="">
                     </div>
-                    <div class="right">
-                        <p>$<span id="totalAmount">00</span></p>
+                    <div class="input-group">
+                        <label for="">Return</label>
+                        <input class="inp-style" type="date" name="">
+                    </div>
+                </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">First Class ($<span id="firstClass-seatAmount">00</span>)</label>
+                        <input id="firstClass-SeatQuantity" class="inp-style inp-width" type="number" name="" value="0">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <button id="firstClass-SeatIncrease" onclick="getFlightSeatNumTotalPrice(true, 'firstClass')" class="btn btn-light"><i class="fas fa-plus "></i></button>
+                        <br>
+                        <button id="firstClass-SeatDecrease" onclick="getFlightSeatNumTotalPrice(false, 'firstClass')" class="btn btn-light"><i class="fas fa-minus "></i></button>
                     </div>
                 </div>
 
-                <div class="amount">
-                    <div class="left">
-                        <p>Charge 10% VAT</p>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($<span id="economy-seatAmount">00</span>)</label>
+                        <input id="economy-SeatQuantity" class="inp-style inp-width" type="number" name="" value="0">
                     </div>
-                    <div class="right">
-                        <p>$<span id="tax">00</span></p>
-                    </div>
-                </div>
-                <hr>
-                <div class="amount">
-                    <div class="left">
-                        <h4>Total</h4>
-                    </div>
-                    <div class="right">
-                        <p>$<span id="grandTotal">00</span></p>
+                    <div class="plus-minus-btn">
+                        <!-- <p> <span id="economy-SeatIncrease">+</span> <span id="economy-SeatDecrease">-</span> </p> -->
+                        <button id="economy-SeatIncrease" onclick="getFlightSeatNumTotalPrice(true, 'economy')" class="btn btn-light"><i class="fas fa-plus "></i></button>
+                        <br>
+                        <button id="economy-SeatDecrease" onclick="getFlightSeatNumTotalPrice(false, 'economy')" class="btn btn-light"><i class="fas fa-minus "></i></button>
                     </div>
                 </div>
-            </div>
-            <button class="btn-style">Book Now</button>
-        </div>
+                <div class="calculations">
+                    <div class="amount">
+                        <div class="left">
+                            <p>Subtotal</p>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="totalAmount">00</span></p>
+                        </div>
+                    </div>
 
-        <div class="booking-content">
-            <h1>discover <br> around the world</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
-        </div>
-    </section>
+                    <div class="amount">
+                        <div class="left">
+                            <p>Charge 10% VAT</p>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="tax">00</span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="amount">
+                        <div class="left">
+                            <h4>Total</h4>
+                        </div>
+                        <div class="right">
+                            <p>$<span id="grandTotal">00</span></p>
+                        </div>
+                    </div>
+                </div>
+                <button  id="bookNowBtn" class="btn-style">Book Now</button>
+            </div>
+
+            <div class="booking-content">
+                <h1>discover <br> around the world</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                    veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt
+                    nobise voluptatibus quam</p>
+            </div>
+        </section>
+
+    </main>
+
+
+
 
     <!--Thank You-->
+
+
+    <!-- extra area start here  -->
+    <div id="confirmation" class="confirmation" style="background-color: #D2C7BA;">
+
+        <div class="order-memo">
+            <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
+                A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
+              </div>
+              <!-- end preheader -->
+            
+              <!-- start body -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            
+            
+                <!-- start hero -->
+                <tr>
+                  <td align="center" bgcolor="#D2C7BA">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                      <tr>
+                        <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0;  border-top: 3px solid #d4dadf;">
+                          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Thank you for your order!</h1>
+                        </td>
+                      </tr>
+                    </table>
+            
+                  </td>
+                </tr>
+                <!-- end hero -->
+            
+                <!-- start copy block -->
+                <tr>
+                  <td align="center" bgcolor="#D2C7BA">
+              
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+            
+                      <!-- start copy -->
+                      <tr>
+                        <td align="left" bgcolor="#ffffff" style="padding: 24px;  font-size: 16px; line-height: 24px;">
+                          <p style="margin: 0;">Here is a summary of your recent order. If you have any questions or concerns about your order, please <a href=#>contact us</a>.</p>
+                        </td>
+                      </tr>
+                      <!-- end copy -->
+            
+                      <!-- start receipt table -->
+                      <tr>
+                        <td align="left" bgcolor="#ffffff" style="padding: 24px; font-size: 16px; line-height: 24px;">
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td align="left" bgcolor="#D2C7BA" width="75%" style="padding: 12px; font-size: 16px; line-height: 24px;"><strong>Order #</strong></td>
+                              <td align="left" bgcolor="#D2C7BA" width="25%" style="padding: 12px; font-size: 16px; line-height: 24px;"><strong>0000224</strong></td>
+                            </tr>
+                            <tr>
+                              <td align="left" width="75%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">First Class || Reserve Seat - <span id="firstClassReserveSeat">00</span></td>
+                              <td align="left" width="25%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">$<span id="firstClassReserveSeatPrice">00</span></td>
+                            </tr>
+                            <tr>
+                              <td align="left" width="75%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">Economy || Reserve Seat - <span id="economoyReserveSeat">00</span> </td>
+                              <td align="left" width="25%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">$<span id="economyReserveSeatPrice">00</span></td>
+                            </tr>
+                            <tr>
+                              <td align="left" width="75%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">Total</td>
+                              <td align="left" width="25%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">$<span id="totalAmountPaid" class="font-weight-bolder">00</span></td>
+                            </tr>
+                            <tr>
+                              <td align="left" width="75%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">Sales Tax</td>
+                              <td align="left" width="25%" style="padding: 6px 12px; font-size: 16px; line-height: 24px;">$<span id="taxPaid" class="font-weight-bolder">00</span></td>
+                            </tr>
+                            <tr>
+                              <td align="left" width="75%" style="padding: 12px;  font-size: 16px; line-height: 24px; border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA;"><strong>Grand Total</strong></td>
+                              <td align="left" width="25%" style="padding: 12px;  font-size: 16px; line-height: 24px; border-top: 2px dashed #D2C7BA; border-bottom: 2px dashed #D2C7BA;"><strong>$<span id="grandTotalPaid">00</span></strong></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- end reeipt table -->
+            
+                    </table>
+                
+                  </td>
+                </tr>
+                <!-- end copy block -->
+            
+                <!-- start receipt address block -->
+                <tr>
+                  <td align="center" bgcolor="#D2C7BA" valign="top" width="100%">
+                
+                    <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+                      <tr>
+                        <td align="center" valign="top" style="font-size: 0; border-bottom: 3px solid #d4dadf">
+                       
+                          <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
+                              <tr>
+                                <td align="left" valign="top" style="padding-bottom: 36px; padding-left: 36px;  font-size: 16px; line-height: 24px;">
+                                  <p><strong>Delivery Address</strong></p>
+                                  <p>1234 S. Broadway Ave<br>Unit 2<br>Denver, CO 80211</p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        
+                          <![endif]-->
+                          <div style="display: inline-block; width: 100%; max-width: 50%; min-width: 240px; vertical-align: top;">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 300px;">
+                              <tr>
+                                <td align="left" valign="top" style="padding-bottom: 36px; padding-left: 36px;  font-size: 16px; line-height: 24px;">
+                                  <p><strong>Billing Address</strong></p>
+                                  <p>1234 S. Broadway Ave<br>Unit 2<br>Denver, CO 80211</p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                     
+                        </td>
+                      </tr>
+                    </table>
+             
+                  </td>
+                </tr>
+                <!-- end receipt address block -->
+            
+               
+            
+                    </table>
+                
+                    </td>
+                    </tr>
+                    </table>
+              
+                  </td>
+                </tr>
+             
+            
+              </table>
+              <!-- end body -->
+        </div>
+      
+      </div>
+    <!-- extra area end here  -->
+
+
+
     <script src="js/booking.js"></script>
 </body>
 

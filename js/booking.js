@@ -1,51 +1,53 @@
-document.getElementById("economy-SeatIncrease").addEventListener("click", function () {
-    totalFlightSeat(true, "economy");
-})
-document.getElementById("economy-SeatDecrease").addEventListener("click", function () {
-    totalFlightSeat(false, "economy");
-})
-//first class seat
-document.getElementById("firstClass-SeatIncrease").addEventListener("click", function () {
-    totalFlightSeat(true, "firstClass");
-})
-
-document.getElementById("firstClass-SeatDecrease").addEventListener("click", function () {
-    totalFlightSeat(false, "firstClass");
-})
-
-function totalFlightSeat(seatIncrease, flightClass) {
-    const economySeat = document.getElementById(flightClass + "-SeatQuantity");
-    const economySeatNum = parseInt(economySeat.value);
-    let totalEconomySeat = economySeatNum;
+function getFlightSeatNumTotalPrice(seatIncrease, flightClass) {
+    const flightSeat = document.getElementById(flightClass + "-SeatQuantity");
+    const flightSeatNum = parseInt(flightSeat.value);
+    let totalFlightSeat = flightSeatNum;
     if (seatIncrease == true) {
-        totalEconomySeat = totalEconomySeat + 1;
+        totalFlightSeat = flightSeatNum + 1;
     }
     else {
-        if (economySeatNum > 0) {
-            totalEconomySeat =totalEconomySeat - 1;
+        if (flightSeatNum > 0) {
+            totalFlightSeat =flightSeatNum - 1;
         }
     }
-    document.getElementById(flightClass + "-SeatQuantity").value = totalEconomySeat;
-    let firstClassAmount = 0;
+    document.getElementById(flightClass + "-SeatQuantity").value = totalFlightSeat;
+    let ticketPrice = 0;
     if(flightClass == "firstClass"){
-        firstClassAmount = totalEconomySeat * 150;
+        ticketPrice = totalFlightSeat * 150;
     }
     else{
-        firstClassAmount = totalEconomySeat * 100;
+        ticketPrice = totalFlightSeat * 100;
     }
-    // let firstClassAmount = economySeatNum * 150;
-    document.getElementById(flightClass + "-seatAmount").innerText = firstClassAmount;
-    totalPrice();
+    document.getElementById(flightClass + "-seatAmount").innerText = ticketPrice;
+    calculatePriceAddcheckOutMemo(false);
 }
 
-function totalPrice(){
+function calculatePriceAddcheckOutMemo(checkoutConfirm){
     let totalEconomyAmount = document.getElementById("economy-SeatQuantity").value;
     let totalFirstClassAmount = document.getElementById("firstClass-SeatQuantity").value;
+    let totalFirstClassPrice = totalFirstClassAmount*150
+    let totalEconomyPrice = totalEconomyAmount *100;
     let totalAmount = totalFirstClassAmount *150 + totalEconomyAmount *100;
-    document.getElementById("totalAmount").innerText = totalAmount;
-    //tax 
     let tax = totalAmount *0.1;
-    document.getElementById("tax").innerText = tax;
     let grandTotal = totalAmount + tax;
-    document.getElementById("grandTotal").innerText = grandTotal;
+    if(checkoutConfirm == true){
+        document.getElementById("totalAmountPaid").innerText = totalAmount;
+        document.getElementById("taxPaid").innerText = tax;
+        document.getElementById("grandTotalPaid").innerText = grandTotal;
+        document.getElementById("firstClassReserveSeat").innerText = totalFirstClassAmount;
+        document.getElementById("economoyReserveSeat").innerText = totalEconomyAmount;
+        document.getElementById("firstClassReserveSeatPrice").innerText = totalFirstClassPrice;
+        document.getElementById("economyReserveSeatPrice").innerText = totalEconomyPrice;
+    }
+    else{
+        document.getElementById("totalAmount").innerText = totalAmount;
+        document.getElementById("tax").innerText = tax;
+        document.getElementById("grandTotal").innerText = grandTotal;
+    }
 }
+
+document.getElementById("bookNowBtn").addEventListener("click", function(){
+    document.getElementById("confirmation").style.display ="block";
+    document.getElementById("orderConfirm").style.display = "none";
+    calculatePriceAddcheckOutMemo(true);
+})
